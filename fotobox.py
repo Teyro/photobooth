@@ -17,12 +17,7 @@ pygame.init()
 pygame.camera.init()
 #set cp als var
 os.system("alias cp=cp")
-# Countdown Bilder laden und als Variabale laden, noch lange nicht final nur quasi schnell hingerotzt, einige Variablen sind noch ohne Funktion
-img1 = pygame.image.load('img/1.png')
-img2 = pygame.image.load('img/2.png')
-img3 = pygame.image.load('img/3.png')
-img4 = pygame.image.load('img/4.png')
-img5 = pygame.image.load('img/5.png')
+
 # Fotofertig soll nachher das mit Gphoto aufgenomme letzte Bild sein
 #fotofertig = pygame.image.load('/home/teyro/fotobox/photobooth_images/lastest_pic.jpg')
 # Dieses Bild wird nachher neben dem Knopf zum teilen gesetzt
@@ -45,7 +40,11 @@ schild = (515,100)
 posten = 0
 # font
 font = pygame.font.SysFont("comicsansms", 72)
-text = font.render(countd, True, (0, 128, 0))
+text5 = font.render("5", True, (0, 128, 0))
+text4 = font.render("4", True, (0, 128, 0))
+text3 = font.render("3", True, (0, 128, 0))
+text2 = font.render("2", True, (0, 128, 0))
+text1 = font.render("1", True, (0, 128, 0))
 
 # Liste der vorhandenen Webcams ermitteln
 camlist = pygame.camera.list_cameras()
@@ -106,33 +105,33 @@ if camlist:
                 countd = countd-1
                 if debug == 1:
                     print("Foto in 5. Sekunden")
-                screen.blit(text, 1280- text.get_width() // 2, 240 - text.get_height() // 2)
+                screen.blit(text5, 1280- text5.get_width() // 2, 240 - text5.get_height() // 2)
 #                time.sleep (0.05)
                 pygame.display.flip()
             elif countd == 4:
                 countd = countd-1
-                screen.blit(text, 1280- text.get_width() // 2, 240 - text.get_height() // 2)
+                screen.blit(text4, 1280- text4.get_width() // 2, 240 - text4.get_height() // 2)
                 if debug == 1:
                     print("Foto in 4. Sekunden")
 #                time.sleep (0.05)
                 pygame.display.flip()
             elif countd == 3:
                 countd = countd-1
-                screen.blit(img3,schild)
+                screen.blit(text3, 1280- text3.get_width() // 2, 240 - text3.get_height() // 2)
                 if debug == 1:
                     print("Foto in 3. Sekunden")
 #                time.sleep (0.05)
                 pygame.display.flip()
             elif countd == 2:
                 countd = countd-1
-                screen.blit(img2,schild)
+                screen.blit(text2, 1280- text2.get_width() // 2, 240 - text2.get_height() // 2)
                 if debug == 1:
                     print("Foto in 2. Sekunden")
 #                time.sleep (0.05)
                 pygame.display.flip()
             elif countd == 1:
                 countd = countd-1
-                screen.blit(img1,schild)
+                screen.blit(text1, 1280- text1.get_width() // 2, 240 - text1.get_height() // 2)
                 if debug == 1:
                     print("Foto in 1. Sekunden")
 #                time.sleep (0.05)
@@ -143,7 +142,8 @@ if camlist:
                 screen.blit(cheese, (0, 0))
                 pygame.display.flip()
                 os.system("rm /home/teyro/fotobox/photobooth_images/photobooth-nummer" + str(i) + ".jpg")
-                os.system("gphoto2 --capture-image-and-download --filename /home/teyro/fotobox/photobooth_images/photobooth-nummer" + str(i) + ".jpg")
+                if debug == 0:
+                    os.system("gphoto2 --capture-image-and-download --filename /home/teyro/fotobox/photobooth_images/photobooth-nummer" + str(i) + ".jpg")
                 #time.sleep(0.25)
                 # Ab hier wird es schmutzig... Da ich über cp immer ne Nachfrage bekomme und über nen y | cp .... nur nen broken Pipe Fehler bekomme ist das der schmutzige fix
                 os.system("rm /home/teyro/fotobox/photobooth_images/lastest_pic.jpg")
